@@ -1,0 +1,25 @@
+name: Example pynt yml 
+on: 
+  workflow_dispatch:
+    inputs: 
+      comment: 
+        type: string 
+        default: "API Security tests"
+
+env:
+  PYNT_CREDENTIALS: ${{ secrets.pynt_test }}
+
+jobs:
+ api-security:
+  runs-on: ubuntu-latest
+
+  steps: 
+    - name: install pynt cli
+      run: | 
+        python3 -m pip install --upgrade pyntcli 
+    - name: get goat collection 
+      run: | 
+        postman collection run Motivity_GroceryStore.postman_collection.json
+    - name: run pynt with newman integration 
+      run: | 
+        pynt newman --collection goat.json --reporters
