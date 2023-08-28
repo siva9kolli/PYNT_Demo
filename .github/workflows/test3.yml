@@ -7,7 +7,7 @@ on:
         default: "API Security tests"
 
 env:
-  PYNT_CREDENTIALS: ${{ secrets.pynt_test }}
+  PYNT_CREDENTIALS: ${{ secrets.PYNT_TEST }}
 
 jobs:
  api-security:
