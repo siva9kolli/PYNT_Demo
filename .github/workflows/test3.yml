@@ -22,4 +22,4 @@ jobs:
         curl https://github.com/siva9kolli/PYNT_Demo/blob/main/gs_test.json -o gs_test.json
     - name: run pynt with newman integration 
       run: | 
-        pynt newman --collection https://github.com/siva9kolli/PYNT_Demo/blob/main/gs_test.json --reporters
+        pynt newman --collection gs_test.json --reporters
