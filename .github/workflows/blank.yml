@@ -1,0 +1,25 @@
+name: ml pynt yml 
+on: 
+  workflow_dispatch:
+    inputs: 
+      comment: 
+        type: string 
+        default: "API Security tests"
+
+env:
+  PYNT_CREDENTIALS: ${{ secrets.pynt_test }}
+
+jobs:
+ api-security:
+  runs-on: ubuntu-latest
+
+  steps: 
+    - name: install pynt cli
+      run: | 
+        python3 -m pip install --upgrade pyntcli 
+    - name: get test ml collection 
+      run: | 
+        curl https://github.com/siva9kolli/PYNT_Demo/blob/main/Motivity_GroceryStore.postman_collection.json -o Motivity_GroceryStore.postman_collection.json
+    - name: run pynt with newman integration 
+      run: | 
+        pynt newman --collection Motivity_GroceryStore.postman_collection.json --reporters
