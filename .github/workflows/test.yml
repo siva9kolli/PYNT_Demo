@@ -17,9 +17,9 @@ jobs:
     - name: install pynt cli
       run: | 
         python3 -m pip install --upgrade pyntcli 
-    - name: get goat collection 
+    - name: get test ML collection 
       run: | 
-        postman collection run Motivity_GroceryStore.postman_collection.json
+        postman collection run https://github.com/siva9kolli/PYNT_Demo/blob/main/Motivity_GroceryStore.postman_collection.json
     - name: run pynt with newman integration 
       run: | 
         pynt newman --collection goat.json --reporters
