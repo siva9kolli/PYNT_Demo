@@ -19,7 +19,7 @@ jobs:
         python3 -m pip install --upgrade pyntcli 
     - name: get test ml collection 
       run: | 
-        curl https://github.com/siva9kolli/PYNT_Demo/blob/main/Motivity_GroceryStore.postman_collection.json -o Motivity_GroceryStore.postman_collection.json
+        curl https://github.com/siva9kolli/PYNT_Demo/blob/main/gs_test.json -o gs_test.json
     - name: run pynt with newman integration 
       run: | 
-        pynt newman --collection Motivity_GroceryStore.postman_collection.json --reporters
+        pynt newman --collection gs_test.json --reporters
