@@ -1,0 +1,25 @@
+name: CICD Pynt test1
+on: 
+  workflow_dispatch:
+    inputs: 
+      comment: 
+        type: string 
+        default: "API Security tests"
+
+env:
+  PYNT_CREDENTIALS: ${{ secrets.PYNT_TEST }}
+
+jobs:
+ api-security:
+  runs-on: ubuntu-latest
+
+  steps: 
+    - name: install pynt cli
+      run: | 
+        python3 -m pip install --upgrade pyntcli 
+    - name: get test ml collection 
+      run: | 
+        curl https://github.com/siva9kolli/PYNT_Demo/blob/main/gs_test.json -o gs_test.json
+    - name: run pynt with newman integration 
+      run: | 
+        pynt newman --collection gs_test.json --reporters
