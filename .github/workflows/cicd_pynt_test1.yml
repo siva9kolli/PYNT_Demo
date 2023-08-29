@@ -19,7 +19,7 @@ jobs:
         python3 -m pip install --upgrade pyntcli 
     - name: get test ml collection 
       run: | 
-        curl https://github.com/siva9kolli/PYNT_Demo/blob/main/gs_test.json -o gs_test.json
+        curl gs_test.json -o gs_test.json
     - name: run pynt with newman integration 
       run: | 
         pynt newman --collection gs_test.json --reporters
