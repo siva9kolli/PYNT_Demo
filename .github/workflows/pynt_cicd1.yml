@@ -1,0 +1,27 @@
+
+name: pynt CICD 
+on: 
+  workflow_dispatch:
+    inputs: 
+      comment: 
+        type: string 
+        default: "API Security tests"
+
+env:
+  PYNT_CREDENTIALS: ${{ secrets.PYNT_TEST }}
+
+jobs:
+ api-security:
+  runs-on: ubuntu-latest
+
+  steps: 
+    - name: install pynt cli
+      run: | 
+        python3 -m pip install --upgrade pyntcli 
+    - name: get goat collection 
+      run: | 
+        curl https://api.postman.com/collections/6464525-f60e53ed-bdb6-47ca-be3d-afd2da5140fc?access_key=PMAT-01H8XJ0EVTX9TTMJGTEPWQBKYZ -o gs_test.json 
+    - name: run pynt with newman integration 
+      run: | 
+        pynt newman --collection gs_test.json --reporters
+ 
