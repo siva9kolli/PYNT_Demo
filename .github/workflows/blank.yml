@@ -1,0 +1,33 @@
+---
+name: Newman CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: null
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create dir
+        run: |
+          mkdir simpleArtifact
+      - name: Install nodejs
+      - uses: actions/checkout@v3
+      - name: Install newman
+        run: |
+          npm install -g newman,
+          npm install -g newman-reporter-htmlextra
+      - name: Rum Collection
+        run: >
+          newman run "gs_test.json" -r htmlextra --reporter-htmlextra-export
+          simpleArtifact/report.html
+      - name: Publish report
+      - uses: actions/checkout@v3
+        with:
+          name: Report
+          path: simpleArtifact
